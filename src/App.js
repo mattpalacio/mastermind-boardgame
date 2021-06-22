@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import Layout from './components/Layout';
+import GameboardPage from './pages/Gameboard';
+import IndexPage from './pages/Index';
+import RulesPage from './pages/Rules';
+import { GameContext } from './providers/gameProvider';
 
-function App() {
+export default function App() {
+  const { hasGameStarted } = useContext(GameContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Switch>
+        <Route exact path="/" component={IndexPage} />
+        <Route path="/gameboard">
+          {hasGameStarted ? <GameboardPage /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/rules" component={RulesPage} />
+      </Switch>
+    </Layout>
   );
 }
-
-export default App;
