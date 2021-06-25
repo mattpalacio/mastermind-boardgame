@@ -20,7 +20,8 @@ const GlobalStyle = createGlobalStyle`
     --white: hsl(0, 0%, 95%);
     --black: hsl(0, 0%, 13%);
     --gray: hsl(0, 0%, 80%);
-    --darkgray: hsl(0, 0%, 70%);
+    --darkGray: hsl(0, 0%, 60%);
+    --darkerGray: hsl(0,0%, 40%);
 
     --baseBg: var(--white);
     --baseText: var(--darkBlue);

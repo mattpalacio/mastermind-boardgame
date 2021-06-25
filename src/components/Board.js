@@ -5,20 +5,20 @@ import BoardRow from './BoardRow';
 import ActiveRow from './ActiveRow';
 
 export default function Board() {
-  const { guesses, hasPlayerWon, setIsGameOver } = useContext(GameContext);
+  const { guesses, hasPlayerWon, setIsGameOver, dummyRef } =
+    useContext(GameContext);
 
   useEffect(() => {
     if (guesses.length === 12 && !hasPlayerWon) {
       setIsGameOver(true);
-      console.log(hasPlayerWon);
     }
-    console.log(hasPlayerWon);
   }, [guesses, hasPlayerWon, setIsGameOver]);
 
   return (
     <Container>
       {guesses && guesses.map((guess, i) => <BoardRow key={i} guess={guess} />)}
       {guesses.length < 12 && <ActiveRow />}
+      <div ref={dummyRef}></div>
       {Array.from({ length: 11 - guesses.length }, (_, i) => (
         <BoardRow key={i} />
       ))}

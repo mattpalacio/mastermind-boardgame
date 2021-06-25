@@ -4,7 +4,8 @@ import colors from '../data/colors';
 import { GameContext } from '../providers/gameProvider';
 
 export default function ColorSelector() {
-  const { secretCode, guess, setGuess, decode } = useContext(GameContext);
+  const { secretCode, guess, setGuess, decode, dummyRef } =
+    useContext(GameContext);
 
   const colorsArr = Object.keys(colors).map((color) => ({
     color,
@@ -24,6 +25,8 @@ export default function ColorSelector() {
   function submitGuess() {
     decode();
     setGuess([]);
+
+    dummyRef.current.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }
 
   return (
@@ -37,8 +40,12 @@ export default function ColorSelector() {
         ))}
       </Colors>
       <Buttons>
-        <button onClick={submitGuess}>Decode</button>
-        <button onClick={clearGuess}>Clear</button>
+        <button onClick={submitGuess} disabled={guess.length < 4}>
+          Decode
+        </button>
+        <button onClick={clearGuess} disabled={guess.length < 1}>
+          Clear
+        </button>
       </Buttons>
     </Container>
   );
@@ -93,6 +100,11 @@ const Buttons = styled.div`
 
     &:first-of-type {
       background-color: var(--lightBlue);
+    }
+
+    &[disabled] {
+      background-color: var(--darkerGray);
+      color: var(--white);
     }
   }
 `;

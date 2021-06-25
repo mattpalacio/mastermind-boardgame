@@ -76,7 +76,7 @@ const Slots = styled.div`
 
     width: var(--size);
     height: var(--size);
-    border: 2px dashed var(--darkgray);
+    border: 2px dashed var(--darkGray);
     border-radius: 50%;
   }
 `;
@@ -96,7 +96,7 @@ const Hints = styled.div`
 
     width: var(--size);
     height: var(--size);
-    border: 2px dashed var(--darkgray);
+    border: 2px dashed var(--darkGray);
     border-radius: 50%;
   }
 `;

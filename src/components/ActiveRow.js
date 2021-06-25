@@ -3,30 +3,33 @@ import styled from 'styled-components';
 import { GameContext } from '../providers/gameProvider';
 
 export default function ActiveRow() {
-  const { guess } = useContext(GameContext);
+  const { guess, dummyRef } = useContext(GameContext);
 
   return (
-    <Wrapper>
-      <div>
-        <Slots>
-          {Array.from({ length: 4 }, (_, i) => (
-            <div
-              key={i}
-              style={{
-                backgroundColor:
-                  guess.length >= i + 1 ? guess[i].hex : 'transparent',
-                border: guess.length >= i + 1 && 'none',
-              }}></div>
-          ))}
-        </Slots>
+    <>
+      <Wrapper>
+        <div>
+          <Slots>
+            {Array.from({ length: 4 }, (_, i) => (
+              <div
+                key={i}
+                style={{
+                  backgroundColor:
+                    guess.length >= i + 1 ? guess[i].hex : 'transparent',
+                  border: guess.length >= i + 1 && 'none',
+                }}></div>
+            ))}
+          </Slots>
 
-        <Hints>
-          {Array.from({ length: 4 }, (_, i) => (
-            <div key={i}></div>
-          ))}
-        </Hints>
-      </div>
-    </Wrapper>
+          <Hints>
+            {Array.from({ length: 4 }, (_, i) => (
+              <div key={i}></div>
+            ))}
+          </Hints>
+        </div>
+      </Wrapper>
+      <div ref={dummyRef}></div>
+    </>
   );
 }
 
@@ -81,7 +84,7 @@ const Slots = styled.div`
 
     width: var(--size);
     height: var(--size);
-    border: 2px dashed var(--darkgray);
+    border: 2px dashed var(--darkGray);
     border-radius: 50%;
   }
 `;
@@ -101,7 +104,7 @@ const Hints = styled.div`
 
     width: var(--size);
     height: var(--size);
-    border: 2px dashed var(--darkgray);
+    border: 2px dashed var(--darkGray);
     border-radius: 50%;
   }
 `;

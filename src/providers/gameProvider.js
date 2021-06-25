@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useRef } from 'react';
 import colors from '../data/colors';
 
 export const GameContext = createContext();
@@ -10,6 +10,7 @@ export default function GameContextProvider({ children }) {
   const [hasGameStarted, setHasGameStarted] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [hasPlayerWon, setHasPlayerWon] = useState(false);
+  const dummyRef = useRef();
 
   function initializeGame() {
     const colorsArr = Object.keys(colors);
@@ -100,6 +101,7 @@ export default function GameContextProvider({ children }) {
         initializeGame,
         endGame,
         decode,
+        dummyRef,
       }}>
       {children}
     </GameContext.Provider>
