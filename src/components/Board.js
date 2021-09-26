@@ -1,18 +1,11 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { GameContext } from '../providers/gameProvider';
 import styled from 'styled-components';
 import BoardRow from './BoardRow';
 import ActiveRow from './ActiveRow';
 
 export default function Board() {
-  const { guesses, hasPlayerWon, setIsGameOver, dummyRef } =
-    useContext(GameContext);
-
-  useEffect(() => {
-    if (guesses.length === 12 && !hasPlayerWon) {
-      setIsGameOver(true);
-    }
-  }, [guesses, hasPlayerWon, setIsGameOver]);
+  const { guesses, dummyRef } = useContext(GameContext);
 
   return (
     <Container>

@@ -1,4 +1,4 @@
-import { createContext, useState, useRef } from 'react';
+import { createContext, useState, useRef, useEffect } from 'react';
 import colors from '../data/colors';
 
 export const GameContext = createContext();
@@ -7,7 +7,6 @@ export default function GameContextProvider({ children }) {
   const [secretCode, setSecretCode] = useState([]);
   const [guess, setGuess] = useState([]);
   const [guesses, setGuesses] = useState([]);
-  const [hasGameStarted, setHasGameStarted] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [hasPlayerWon, setHasPlayerWon] = useState(false);
   const dummyRef = useRef();
@@ -28,7 +27,6 @@ export default function GameContextProvider({ children }) {
     }
 
     setSecretCode(randomColorsArr);
-    setHasGameStarted(true);
   }
 
   function endGame() {
@@ -36,7 +34,6 @@ export default function GameContextProvider({ children }) {
     setGuesses([]);
     setHasPlayerWon(false);
     setIsGameOver(false);
-    setHasGameStarted(false);
   }
 
   function decode() {
@@ -84,6 +81,14 @@ export default function GameContextProvider({ children }) {
     }
   }
 
+  useEffect(() => {
+    hasPlayerWon
+      ? setIsGameOver(true)
+      : guesses.length === 12
+      ? setIsGameOver(true)
+      : setIsGameOver(false);
+  }, [guesses, hasPlayerWon, setIsGameOver]);
+
   return (
     <GameContext.Provider
       value={{
@@ -93,8 +98,6 @@ export default function GameContextProvider({ children }) {
         setGuess,
         guesses,
         setGuesses,
-        hasGameStarted,
-        setHasGameStarted,
         isGameOver,
         setIsGameOver,
         hasPlayerWon,

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import styled from 'styled-components';
-import colors from '../data/colors';
 import { GameContext } from '../providers/gameProvider';
+import colors from '../data/colors';
+import styled from 'styled-components';
 
 export default function ColorSelector() {
   const { secretCode, guess, setGuess, decode, dummyRef } =

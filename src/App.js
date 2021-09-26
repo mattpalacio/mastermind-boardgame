@@ -7,14 +7,14 @@ import RulesPage from './pages/Rules';
 import { GameContext } from './providers/gameProvider';
 
 export default function App() {
-  const { hasGameStarted } = useContext(GameContext);
+  const { secretCode } = useContext(GameContext);
 
   return (
     <Layout>
       <Switch>
         <Route exact path="/" component={IndexPage} />
         <Route path="/gameboard">
-          {hasGameStarted ? <GameboardPage /> : <Redirect to="/" />}
+          {secretCode.length !== 0 ? <GameboardPage /> : <Redirect to="/" />}
         </Route>
         <Route path="/rules" component={RulesPage} />
       </Switch>

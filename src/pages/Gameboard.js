@@ -1,34 +1,19 @@
-import { useEffect, useContext } from 'react';
-import styled from 'styled-components';
+import { useContext } from 'react';
 import { GameContext } from '../providers/gameProvider';
 import colors from '../data/colors';
 import Board from '../components/Board';
 import ColorSelector from '../components/ColorSelector';
 import Modal from '../components/Modal';
+import styled from 'styled-components';
 
 export default function GameboardPage() {
-  const {
-    secretCode,
-    guesses,
-    hasPlayerWon,
-    isGameOver,
-    setIsGameOver,
-    endGame,
-  } = useContext(GameContext);
-
-  useEffect(() => {
-    if (hasPlayerWon) {
-      setIsGameOver(true);
-    } else if (!hasPlayerWon && guesses.length === 12) {
-      setIsGameOver(true);
-    }
-  }, [guesses, hasPlayerWon, setIsGameOver]);
+  const { secretCode, hasPlayerWon, isGameOver, endGame } =
+    useContext(GameContext);
 
   return (
     <Container>
       <Board />
-      {isGameOver || <ColorSelector />}
-      {isGameOver && (
+      {isGameOver ? (
         <Modal>
           <Card>
             <h1>Game Over</h1>
@@ -47,6 +32,8 @@ export default function GameboardPage() {
             <button onClick={endGame}>End Game</button>
           </Card>
         </Modal>
+      ) : (
+        <ColorSelector />
       )}
     </Container>
   );
